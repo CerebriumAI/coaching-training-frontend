@@ -23,10 +23,10 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
     handleReady("testing");
 
     // setIsLoading(true);
-    // fetch(`${process.env.NEXT_PUBLIC_CEREBRIUM_URL}/create_room`, {
+    // fetch(`${process.env.NEXT_PRIVATE_CEREBRIUM_URL}/create_room`, {
     //   method: 'POST',
     //   headers: {
-    //     'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CEREBRIUM_AUTH_TOKEN}`,
+    //     'Authorization': `Bearer ${process.env.NEXT_PRIVATE_CEREBRIUM_AUTH_TOKEN}`,
     //     'Content-Type': 'application/json'
     //   },
     //   body: JSON.stringify({})

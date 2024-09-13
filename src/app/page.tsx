@@ -4,7 +4,7 @@ import { LiveView } from "@/components/LiveView";
 import Splash from "./Splash";
 import { useState } from "react";
 import Header from "../components/ui/header";
-const showSplashPage = process.env.NEXT_PUBLIC_SHOW_SPLASH;
+const showSplashPage = process.env.NEXT_PRIVATE_SHOW_SPLASH;
 
 
 export default function Home() {

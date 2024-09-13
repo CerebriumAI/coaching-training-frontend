@@ -8,8 +8,8 @@ import { channel } from 'diagnostics_channel';
 import 'dotenv/config';
 import DailyIframe from '@daily-co/daily-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_TOKEN || ''
+const supabaseUrl = process.env.NEXT_PRIVATE_SUPABASE_URL || ''
+const supabaseKey = process.env.NEXT_PRIVATE_SUPABASE_TOKEN || ''
 const supabase = createClient(supabaseUrl,supabaseKey)
 
 
@@ -34,10 +34,10 @@ export function LiveView({ url }: { url: string }) {
   // const monitor_room = (url: string) => {
   //   setIsLoading(true);
   //   setRunID(url);
-  //   fetch(`${process.env.NEXT_PUBLIC_CEREBRIUM_URL}/start`, {
+  //   fetch(`${process.env.NEXT_PRIVATE_CEREBRIUM_URL}/start`, {
   //     method: 'POST',
   //     headers: {
-  //       'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CEREBRIUM_AUTH_TOKEN}`,
+  //       'Authorization': `Bearer ${process.env.NEXT_PRIVATE_CEREBRIUM_AUTH_TOKEN}`,
   //       'Content-Type': 'application/json'
   //     },
   //     body: JSON.stringify({"room_url": url})
