@@ -31,38 +31,38 @@ export function LiveView({ url }: { url: string }) {
   const effectRan = useRef(false);
 
 
-  const monitor_room = (url: string) => {
-    setIsLoading(true);
-    setRunID(url);
-    fetch(`${process.env.NEXT_PUBLIC_CEREBRIUM_URL}/start`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CEREBRIUM_AUTH_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({"room_url": url})
-    })
-      .then(async response => {
-        if (response.status === 200) {
-          const data = await response.json();
-        } else {
-          throw new Error('Failed to join room');
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching joining room:', error);
-        setError('An error occurred while joining the room. Please refresh and try again');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  // const monitor_room = (url: string) => {
+  //   setIsLoading(true);
+  //   setRunID(url);
+  //   fetch(`${process.env.NEXT_PUBLIC_CEREBRIUM_URL}/start`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CEREBRIUM_AUTH_TOKEN}`,
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({"room_url": url})
+  //   })
+  //     .then(async response => {
+  //       if (response.status === 200) {
+  //         const data = await response.json();
+  //       } else {
+  //         throw new Error('Failed to join room');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching joining room:', error);
+  //       setError('An error occurred while joining the room. Please refresh and try again');
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // };
 
-  useEffect(() => {
-    if (effectRan.current) return;
-    effectRan.current = true;
-    monitor_room(url);
-  }, []);
+  // useEffect(() => {
+  //   if (effectRan.current) return;
+  //   effectRan.current = true;
+  //   monitor_room(url);
+  // }, []);
 
   useEffect(() => {
     console.log('LiveView useEffect triggered with URL:', url);
@@ -86,7 +86,7 @@ export function LiveView({ url }: { url: string }) {
         });
 
         console.log('DailyIframe created, attempting to join call');
-        await callFrameRef.current.join({ url });
+        await callFrameRef.current.join({ url: "https://tavus.daily.co/c8b0fe3e" });
         console.log('Successfully joined call');
       } catch (error) {
         console.error('Error creating or joining DailyIframe:', error);
@@ -104,42 +104,42 @@ export function LiveView({ url }: { url: string }) {
     };
   }, [url]);
 
-  useEffect(()=> {
-    const getProducts = async () => {
-      const { data } = await supabase.from("products").select().eq('run_id', runID);
-      setIsLoading(false)
-      if (data) {
-        setProducts(data);
-      }
-    }
+  // useEffect(()=> {
+  //   const getProducts = async () => {
+  //     const { data } = await supabase.from("products").select().eq('run_id', runID);
+  //     setIsLoading(false)
+  //     if (data) {
+  //       setProducts(data);
+  //     }
+  //   }
 
-    getProducts()
-  }, [runID])
+  //   getProducts()
+  // }, [runID])
 
-  useEffect(()=> {
-    const channel = supabase.channel('realtime products').on('postgres_changes', {
-      event: 'INSERT',
-      schema: 'public',
-      table: 'products',
-      filter: `run_id=eq.${runID}`
-    }, (payload) => {
-      console.log(payload)
-      setProducts(prevProducts => {
-        const newProduct = payload.new as Product;
-        return [newProduct, ...prevProducts];
-      });
-    }).subscribe()
+  // useEffect(()=> {
+  //   const channel = supabase.channel('realtime products').on('postgres_changes', {
+  //     event: 'INSERT',
+  //     schema: 'public',
+  //     table: 'products',
+  //     filter: `run_id=eq.${runID}`
+  //   }, (payload) => {
+  //     console.log(payload)
+  //     setProducts(prevProducts => {
+  //       const newProduct = payload.new as Product;
+  //       return [newProduct, ...prevProducts];
+  //     });
+  //   }).subscribe()
 
-    return () => {
-      supabase.removeChannel(channel)
-    }
-  }, [runID, supabase])
+  //   return () => {
+  //     supabase.removeChannel(channel)
+  //   }
+  // }, [runID, supabase])
 
   return (
-    <div className="grid md:grid-cols-[6fr_3fr] gap-6 max-w-full mx-auto p-4 md:p-6">
-      <div className="relative w-full aspect-video rounded-lg overflow-hidden" id="daily-video-container">
+    <div className="flex justify-center items-center w-full p-4 md:p-6">
+      <div className="relative w-3/4 aspect-video rounded-lg overflow-hidden" id="daily-video-container">
       </div>
-      <div className="grid gap-6">
+      {/* <div className="grid gap-6">
         <h2 className="text-2xl font-bold mb-4 sticky top-0 z-10">Products</h2>
         <div className="overflow-auto max-h-[calc(80vh-3rem)] max-w-[70%]">
           {error ? (
@@ -170,7 +170,7 @@ export function LiveView({ url }: { url: string }) {
             ))
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

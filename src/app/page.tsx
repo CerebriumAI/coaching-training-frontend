@@ -22,13 +22,6 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center">
       <Header />
       <div className="text-center mb-8">
-        <p>
-          <ul>This demo works best when your camera is high quality</ul>
-          <br/>
-          <ul>We only trained the object detection model only recognises shoes, cups, books and watches</ul>
-          <br/>
-          <ul>It won't show a type of item (ie: cup) again if its already been detected</ul>
-        </p>
       </div>
       {streamUrl && <LiveView url={streamUrl} />}
     </main>
