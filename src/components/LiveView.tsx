@@ -8,9 +8,9 @@ import { channel } from 'diagnostics_channel';
 import 'dotenv/config';
 import DailyIframe from '@daily-co/daily-js';
 
-const supabaseUrl = process.env.NEXT_PRIVATE_SUPABASE_URL || ''
-const supabaseKey = process.env.NEXT_PRIVATE_SUPABASE_TOKEN || ''
-const supabase = createClient(supabaseUrl,supabaseKey)
+// const supabaseUrl = process.env.NEXT_PRIVATE_SUPABASE_URL || ''
+// const supabaseKey = process.env.NEXT_PRIVATE_SUPABASE_TOKEN || ''
+// const supabase = createClient(supabaseUrl,supabaseKey)
 
 
 interface Product {
