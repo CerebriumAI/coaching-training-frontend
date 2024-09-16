@@ -85,7 +85,7 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
             - recreating real life scenerios?
           </p>
           <p className="lg:text-lg text-primary-600">
-          In this demo, you can chose whether you would like to be interviewed or taught to be better at sales all achieved through Carter - our assistant. 
+          In this demo, you can chose whether you would like to be interviewed or taught to be better at sales all achieved through Carter - our AI assistant. 
           </p>
         </div>
         <div className="flex flex-col items-center gap-4">
