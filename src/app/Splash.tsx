@@ -15,37 +15,36 @@ type SplashProps = {
 const Splash: React.FC<SplashProps> = ({ handleReady }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedDemoType, setSelectedDemoType] = useState<string>("sales-training");
-
+  const [selectedDemoType, setSelectedDemoType] = useState<string>("sales");
+  const [showModal, setShowModal] = useState<boolean>(false)
 
 
   const fetchStreamUrl = () => {
-    handleReady("testing");
 
-    // setIsLoading(true);
-    // fetch(`${process.env.NEXT_PRIVATE_CEREBRIUM_URL}/create_room`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Authorization': `Bearer ${process.env.NEXT_PRIVATE_CEREBRIUM_AUTH_TOKEN}`,
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({})
-    // })
-    //   .then(async response => {
-    //     if (response.status === 200) {
-    //       const data = await response.json();
-    //       handleReady(data.result.url);
-    //     } else {
-    //       throw new Error('Failed to fetch stream URL');
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error('Error fetching stream URL:', error);
-    //     setError("We are at capacity at the moment. Please try again later!");
-    //   })
-    //   .finally(() => {
-    //     setIsLoading(false);
-    //   });
+    setIsLoading(true);
+    fetch(`${process.env.NEXT_PUBLIC_CEREBRIUM_URL}/create_tavus_conversation`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CEREBRIUM_AUTH_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({"type": selectedDemoType})
+    })
+      .then(async response => {
+        if (response.status === 200) {
+          const data = await response.json();
+          handleReady(data.result.conversation_url);
+        } else {
+          throw new Error('Failed to fetch stream URL');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching stream URL:', error);
+        setError("We are at capacity at the moment. Please try again later!");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
 
   };
 
@@ -97,9 +96,9 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
             type="radio"
             id="sales-training"
             name="demo-type"
-            value="sales-training"
+            value="sales"
             className="form-radio h-4 w-4 text-purple-600"
-            checked={selectedDemoType === "sales-training"}
+            checked={selectedDemoType === "sales"}
             onChange={(e) => setSelectedDemoType(e.target.value)}
           />
           <label htmlFor="sales-training" className="text-sm font-medium text-gray-700">
@@ -111,9 +110,9 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
             type="radio"
             id="interview-prep"
             name="demo-type"
-            value="interview-prep"
+            value="interview"
             className="form-radio h-4 w-4 text-purple-600"
-            checked={selectedDemoType === "interview-prep"}
+            checked={selectedDemoType === "interview"}
             onChange={(e) => setSelectedDemoType(e.target.value)}
           />
           <label htmlFor="interview-prep" className="text-sm font-medium text-gray-700">
@@ -129,7 +128,33 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
             Loading...
           </Button>
         ) : (
-          <Button onClick={fetchStreamUrl}>Start Demo</Button>
+          <>
+            <Button onClick={() => setShowModal(true)}>Start Demo</Button>
+            {showModal && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div className="bg-white p-6 rounded-lg w-1/2 mx-auto">
+                  <h2 className="text-xl font-bold mb-4 text-center">Note</h2>
+                  {selectedDemoType === "sales" ? (
+                    <p className="mb-4 text-center">
+                      This is a sales training simulation, you'll interact with Carter, our AI assistant. Carter will play the role of a frustrated customer since your infrastructure platform keeps experiencing outages. Your task is to practice your sales skills. Try to understand the customer's issues, present a solution and timeline to solve these issues.
+                    </p>
+                  ) : (
+                    <p className="mb-4 text-center">
+                      In this interview preparation simulation, you'll interact with Carter, our AI assistant. Carter will play the role of an interviewer, asking you common interview questions. Your task is to practice answering these questions confidently and effectively. Remember to highlight your skills and experiences relevant to the job you're applying for.
+                    </p>
+                  )}
+                  <div className="flex justify-center">
+                    <Button onClick={() => {
+                      setShowModal(false);
+                      fetchStreamUrl();
+                    }}>
+                      Ok
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
         )}
         {error && (
           <div className="text-red-500 mb-4">
@@ -150,8 +175,7 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
           </Button>
           <Button asChild className="text-purple-600 hover:text-purple-700 bg-transparent">
             <a
-              href="https://www.cerebrium.ai/blog/building-a-real-time-shopping-assistant-turn-live-video-into-instant-purchases"
-            >
+              href="www.cerebrium.ai/blog/how-to-build-a-real-time-ai-avatar-for-training-and-coaching">
               <Rocket className="size-6" />
               Deploy your own
             </a>
