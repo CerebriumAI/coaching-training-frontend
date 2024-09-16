@@ -49,13 +49,13 @@ export function LiveView({ url }: { url: string }) {
 
 
   return (
-    <div>
-      <div className="flex justify-center items-center w-full">
+    <div className="w-full">
+      <div className="flex flex-col justify-center items-center w-full gap-4">
           <p className='text-center max-w-2xl'>For demo purposes we are using the Mistral API which can lead to large latencies. You can read our blog post on how to reduce these latencies deploying a function-calling compatible model locally on Cerebrium</p>
           <p className='text-center max-w-2xl'>Demo works best when in a quiet environment</p>
         </div>
       <div className="flex justify-center items-center w-full p-4 md:p-6">
-        <div className="relative w-3/4 aspect-video rounded-lg overflow-hidden" id="daily-video-container">
+        <div className="relative w-3/4 aspect-video rounded-lg overflow-hidden mx-auto" id="daily-video-container">
         </div>
       </div>
     </div>
