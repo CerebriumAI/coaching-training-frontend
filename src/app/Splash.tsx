@@ -167,7 +167,7 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
         <footer className="flex flex-col lg:flex-row lg:gap-2">
           <Button asChild className="text-purple-600 hover:text-purple-700 bg-transparent">
         <a
-              href="https://github.com/CerebriumAI/examples/tree/master/27-ecommerce-live-stream"
+              href="https://github.com/CerebriumAI/examples/tree/master/28-sales-trainer"
             >
               <Book className="size-6" />
               View source code
