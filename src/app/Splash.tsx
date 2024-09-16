@@ -175,7 +175,9 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
           </Button>
           <Button asChild className="text-purple-600 hover:text-purple-700 bg-transparent">
             <a
-              href="www.cerebrium.ai/blog/how-to-build-a-real-time-ai-avatar-for-training-and-coaching">
+              href="https://www.cerebrium.ai/blog/how-to-build-a-real-time-ai-avatar-for-training-and-coaching"
+              target="_blank"
+            >
               <Rocket className="size-6" />
               Deploy your own
             </a>
