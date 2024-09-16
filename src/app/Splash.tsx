@@ -15,7 +15,7 @@ type SplashProps = {
 const Splash: React.FC<SplashProps> = ({ handleReady }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedDemoType, setSelectedDemoType] = useState<string>("sales");
+  const [selectedDemoType, setSelectedDemoType] = useState<string>("interview");
   const [showModal, setShowModal] = useState<boolean>(false)
 
 
@@ -91,6 +91,20 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
         <div className="flex flex-col items-center gap-4">
         <h3 className="text-lg font-semibold">Pick simulation</h3>
       <div className="flex flex-row gap-6">
+      <div className="flex items-center space-x-2">
+          <input
+            type="radio"
+            id="interview-prep"
+            name="demo-type"
+            value="interview"
+            className="form-radio h-4 w-4 text-purple-600"
+            checked={selectedDemoType === "interview"}
+            onChange={(e) => setSelectedDemoType(e.target.value)}
+          />
+          <label htmlFor="interview-prep" className="text-sm font-medium text-gray-700">
+            Interview Prep
+          </label>
+        </div>
         <div className="flex items-center space-x-2">
           <input
             type="radio"
@@ -103,20 +117,6 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
           />
           <label htmlFor="sales-training" className="text-sm font-medium text-gray-700">
             Sales Training
-          </label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <input
-            type="radio"
-            id="interview-prep"
-            name="demo-type"
-            value="interview"
-            className="form-radio h-4 w-4 text-purple-600"
-            checked={selectedDemoType === "interview"}
-            onChange={(e) => setSelectedDemoType(e.target.value)}
-          />
-          <label htmlFor="interview-prep" className="text-sm font-medium text-gray-700">
-            Interview Prep
           </label>
         </div>
       </div>
