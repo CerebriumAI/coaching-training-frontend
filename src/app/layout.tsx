@@ -6,8 +6,8 @@ import { Analytics } from '@vercel/analytics/react';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Building a Real-Time Shopping Assistant",
-  description: "Turn Live video into instant purchases using object recognition",
+  title: "A Real-Time AI Avatar for Coaching and Training Simulations",
+  description: "Simulate real-life scenarios at scale using an AI Avatar and see performance increases",
 };
 
 export default function RootLayout({
