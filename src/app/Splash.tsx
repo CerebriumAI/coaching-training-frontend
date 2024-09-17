@@ -49,9 +49,10 @@ const Splash: React.FC<SplashProps> = ({ handleReady }) => {
   };
 
   return (
-    <main className="w-full min-h-screen flex items-center justify-center bg-primary-200 p-4 bg-[length:auto_50%] lg:bg-auto bg-colorWash bg-no-repeat bg-right-top overflow-y-auto">
-      <div className="flex flex-col gap-8 lg:gap-12 items-center max-w-full lg:max-w-3xl py-8">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-balance text-center">Train and onboard employees seamlessly
+    <main className="w-full min-h-screen flex flex-col items-center justify-start bg-primary-200 p-4 bg-[length:auto_50%] lg:bg-auto bg-colorWash bg-no-repeat bg-right-top overflow-y-auto">
+      <div className="flex flex-col gap-8 lg:gap-12 items-center w-full max-w-3xl pt-16">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-balance text-center">
+          Train and onboard employees seamlessly
         </h1>
 
         <div className="flex flex-col gap-2">
